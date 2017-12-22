@@ -37,12 +37,12 @@ html {
   height: 600px;
 }
 body, #root, .root {
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: 600px;
 }
 .root {
   display: grid;
-  grid-template-columns: 60px 300px 50px;
+  grid-template-columns: 60px 424px 12px;
   grid-template-rows: auto;
   grid-template-areas:
     "nav content rgutter";
@@ -51,6 +51,11 @@ body, #root, .root {
 .nav {
   grid-area: nav;
   background: rgb(41, 47, 50);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 60px;
 }
 
 .nav .button-container {
@@ -73,6 +78,10 @@ body, #root, .root {
 .content {
   grid-area: content;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .right-gutter {
@@ -80,14 +89,35 @@ body, #root, .root {
 }
 
 .clip-table {
-  display: block;
-  /* width: 400px; */
+  display: flex;
+  flex-direction: column;
 }
 .clip-row {
+  display: block;
   padding: 4px 0;
 }
+.clip-row:hover {
+  background: rgba(41, 47, 50, 0.1);
+}
+
 .clip-item {
   padding: 8px;
+  width: 100%;
+  display: flex;
+}
+.clip-item-content {
+  flex-grow: 1;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+.clip-item-icon {
+  font-size: 18px;
+}
+.clip-item-icon-copy {
+  padding-right: 10px;
+}
+.clip-item-icon:not(.clip-item-icon-copy) {
+  padding-right: 5px;
 }
 
 th:first-child, td:first-child,

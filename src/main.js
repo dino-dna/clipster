@@ -28,10 +28,14 @@ var mb = menubar({
       pathname: path.join(__dirname, 'index.html'),
       protocol: 'file:',
       slashes: true
-    })
+    }),
+  width: 500,
+  height: 600
+  // alwaysOnTop: true
 })
 
 mb.on('ready', async function ready () {
+  debug('menubar:create-window')
   var history = [] // @TODO refresh from disk
   var maxHistoryLength = 100 // @TODO config option
   var lastClipboardContent = {}
@@ -39,6 +43,7 @@ mb.on('ready', async function ready () {
   var lastSetFromUi = {}
 
   mb.on('create-window', () => {
+    debug('menubar:create-window')
     ipcMain.on('webapp:ready', (event, arg) => {
       let msg = JSON.stringify(history)
       mb.window.webContents.executeJavaScript(`window.receive(${msg})`)
@@ -48,6 +53,10 @@ mb.on('ready', async function ready () {
       lastSetFromUi = toMessage(text)
       clipboard.writeText(text)
     })
+  })
+  mb.on('after-create-window', () => {
+    mb.window.setResizable(false)
+    mb.window.setMovable(false)
   })
   mb.on('after-close', () => {
     isWindowOpen = false

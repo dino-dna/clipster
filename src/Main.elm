@@ -3,6 +3,7 @@ port module Main exposing (..)
 import Html exposing (Html, table, span, text, div, h1, img, ol, ul, li, tr, td)
 import Html.Attributes exposing (class, src)
 import Html.Events exposing (onClick)
+import String
 
 port clipboardEvents : (ClipboardEvents -> msg) -> Sub msg
 port clipboardEvent : (ClipboardEvent -> msg) -> Sub msg
@@ -44,9 +45,14 @@ update msg model =
 
 renderHistoricClip : ClipboardEvent -> Html Msg
 renderHistoricClip clip =
-  tr [ onClick (SetPasteMsg clip.string) ] [
-    td [ class "clip-row" ] [
-      span [ class "clip-item" ] [ text clip.string ]
+  div [ class "clip-row", onClick (SetPasteMsg clip.string) ] [
+    span [ class "clip-item" ] [
+      span [ class "clip-item-icon clip-item-icon-copy typcn typcn-tabs-outline" ] [],
+      span [ class "clip-item-content" ] [ text clip.string ],
+      span [ class "clip-item-icon typcn typcn-arrow-up-outline" ] [],
+      span [ class "clip-item-icon typcn typcn-arrow-down-outline" ] [],
+      span [ class "clip-item-icon typcn typcn-bookmark" ] [],
+      span [ class "clip-item-icon typcn typcn-times-outline" ] []
     ]
   ]
 
@@ -59,11 +65,15 @@ view model =
           div [ class "icon typcn typcn-attachment-outline" ] [ ]
         ],
         div [ class "button-container" ] [
-          div [ class "icon typcn typcn-arrow-left" ] [ ]
+          div [ class "icon typcn typcn-bookmark" ] [ ]
+        ],
+        div [ class "button-container" ] [
+          div [ class "icon typcn typcn-cog-outline" ] [ ]
         ]
       ],
       div [ class "content"] [
-        table [ class "clip-table" ] (List.map renderHistoricClip model.history)
+        div [ class "clip-table" ] (List.reverse (List.map renderHistoricClip model.history)),
+        div [] [ text "WHOA START COPYING BRO" ]
       ],
       div [ class "right-gutter" ] []
     ]
