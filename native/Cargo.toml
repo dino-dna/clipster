@@ -1,0 +1,17 @@
+[package]
+name = "clippy-rust"
+version = "0.1.0"
+authors = ["cdaringe <christopher.dieringer@gmail.com>"]
+license = "MIT"
+build = "build.rs"
+
+[lib]
+name = "clippy_rust"
+crate-type = ["dylib"]
+
+[build-dependencies]
+neon-build = "0.1.22"
+
+[dependencies]
+neon = "0.1.22"
+clipboard = "0.4.2"
