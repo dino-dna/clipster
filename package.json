@@ -9,9 +9,9 @@
   "scripts": {
     "build": "electron-build-env neon build",
     "start": "run-p start:*",
-    "start:electron": "electron src/main.js",
-    "start:electron:debug": "electron --inspect src/main.js",
-    "start:elm": "BROWSER=none ELM_SCRIPTS_WEBPACK_ENV_TARGET=electron-renderer elm-app start",
+    "start:electron": "electron src/main/index.js",
+    "start:electron:debug": "DEBUG=clipster* electron --inspect src/main/index.js",
+    "start:elm": "DEBUG=clipster* BROWSER=none ELM_SCRIPTS_WEBPACK_ENV_TARGET=electron-renderer elm-app start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -25,9 +25,14 @@
     "standard": "^10.0.3"
   },
   "dependencies": {
+    "abab": "^1.0.4",
     "debug": "^3.1.0",
+    "fs-extra": "^5.0.0",
+    "lodash": "^4.17.4",
     "menubar": "^5.2.3",
+    "perish": "^1.0.1",
     "skeleton-css": "^2.0.4",
-    "typicons.font": "^2.0.9"
+    "typicons.font": "^2.0.9",
+    "winston": "^2.4.0"
   }
 }

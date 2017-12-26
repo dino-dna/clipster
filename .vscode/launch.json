@@ -16,11 +16,10 @@
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
-      "program": "${workspaceFolder}/src/main.js",
+      "program": "${workspaceFolder}/src/main/index.js",
       "env": {
         "DEBUG": "clipster*"
-      },
-      "args" : ["."]
+      }
     }
   ]
 }
