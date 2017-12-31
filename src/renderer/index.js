@@ -1,25 +1,26 @@
 // renderer index
-import './main.css'
-import { Main } from './Main.elm'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 import registerServiceWorker from './registerServiceWorker'
+import './main.css'
 import 'typicons.font'
 import '../../node_modules/skeleton-css/css/normalize.css'
 import '../../node_modules/skeleton-css/css/skeleton.css'
-const { ipcRenderer } = require('electron')
-var logger = require('./logger')
 
-logger.info('booting elm app')
-const app = Main.embed(document.getElementById('root'))
-
-app.ports.setPaste.subscribe(text => {
-  logger.info(`sending clip selection to main: ${text.substr(0, 20)}${text.length > 20 ? '...' : ''}`)
-  ipcRenderer.send('webapp:setPasteText', text)
-})
-
-window.receive = function (msg) {
-  logger.info('message received from main')
-  if (Array.isArray(msg)) return app.ports.clipboardEvents.send(msg)
-  return app.ports.clipboardEvent.send(msg)
+var app = require('./services/app')
+var { ipcRenderer } = require('electron')
+var stateService = require('./services/state')
+var { onUpdate: onStateUpdate, state, update, messages } = stateService
+app.bus = require('./services/bus')(stateService)
+function render (state) {
+  return ReactDOM.render(
+    <App {...state} update={update} messages={messages} />,
+    document.getElementById('root')
+  )
 }
+onStateUpdate(render)
+render(state)
+
 registerServiceWorker()
 ipcRenderer.send('webapp:ready', true)

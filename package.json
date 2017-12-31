@@ -1,7 +1,6 @@
 {
   "name": "clipster",
-  "version": "1.0.0",
-  "description": "This project is bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).",
+  "version": "0.0.1",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -11,8 +10,7 @@
     "start": "run-p start:*",
     "start:electron": "electron src/main/index.js",
     "start:electron:debug": "DEBUG=clipster* electron --inspect src/main/index.js",
-    "start:elm": "DEBUG=clipster* BROWSER=none ELM_SCRIPTS_WEBPACK_ENV_TARGET=electron-renderer elm-app start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:react": "DEBUG=clipster* BROWSER=none REACT_APP_WEBPACK_ENV_TARGET=electron-renderer react-scripts start"
   },
   "keywords": [],
   "author": "",
@@ -27,10 +25,14 @@
   "dependencies": {
     "abab": "^1.0.4",
     "debug": "^3.1.0",
+    "entropy-string": "^2.2.2",
     "fs-extra": "^5.0.0",
     "lodash": "^4.17.4",
     "menubar": "^5.2.3",
     "perish": "^1.0.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "^1.0.17",
     "skeleton-css": "^2.0.4",
     "typicons.font": "^2.0.9",
     "winston": "^2.4.0"

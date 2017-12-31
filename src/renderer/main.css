@@ -68,6 +68,10 @@ body, #root, .root {
   background: pink;
 }
 
+.nav .active {
+  background-color: rgba(93, 108, 115, 0.5);
+}
+
 .nav .button-container .icon {
   transition: all .8s ease-in-out;
 }
@@ -97,7 +101,7 @@ body, #root, .root {
 }
 
 .clip-item-last {
-  margin-right: 16px;
+  margin-right: 22px;
 }
 
 .clip-item {
@@ -115,21 +119,34 @@ body, #root, .root {
   font-size: 18px;
   transition: color 200ms;
 }
-/* .clip-item-icon:hover {
-  box-shadow: rgba(255,0,0, 0.1) 0 0 8px 0;
-  border-radius: 8px;
-  background-color: rgba(255,0,0, 0.2);
-  line-height: 20px;
-} */
 
 .clip-item-icon-copy {
   padding-right: 10px;
 }
-.clip-item-icon:not(.clip-item-icon-copy) {
-  padding-right: 5px;
-}
+.bookmark-onselect .clip-item-icon-bookmark,
 .clip-item-onselect .clip-item-icon-copy {
-  color: purple;
+  animation: rotate-fake-out 1s;
+  color: green;
+}
+.clip-item-icon:not(.clip-item-icon-copy) {
+  padding-right: 2px;
+  padding-left: 2px;
+}
+
+
+@keyframes rotate-fake-out {
+  0%   {
+    transform: rotateZ(0deg);
+  }
+  25%  {
+    transform: rotateZ(360deg);
+  }
+  75%  {
+    transform: rotateZ(360deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
 }
 
 .clip-item-icon-delete:hover {
