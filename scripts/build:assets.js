@@ -19,6 +19,7 @@ async function assets () {
   ])
   var appPkg = require('../package.json')
   ;['build', 'scripts', 'devDependencies'].forEach(key => { delete appPkg[key] })
+  appPkg.main = 'index.js'
   await fs.writeFile(
     path.resolve(__dirname, '../app/package.json'),
     JSON.stringify(appPkg, null, 2)
