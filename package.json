@@ -66,6 +66,10 @@
   "build": {
     "appId": "org.dino-dna.clipster",
     "productName": "clipster",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg"
+    },
     "win": {
       "publish": ["github"]
     }
