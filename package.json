@@ -20,7 +20,7 @@
     "start": "run-p start:*",
     "start:electron:debug": "DEBUG=clipster* electron --inspect src/main/index.js",
     "start:react": "DEBUG=clipster* BROWSER=none REACT_APP_WEBPACK_ENV_TARGET=electron-renderer react-scripts start",
-    "semantic-release": "node scripts/semantic-release.js"
+    "semantic-release": "semantic-release"
   },
   "keywords": [],
   "author": "cdaringe",

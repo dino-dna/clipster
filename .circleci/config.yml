@@ -46,9 +46,10 @@ jobs:
           command: |
             if [[ $CIRCLE_BRANCH == "master" ]]
             then
-              npm run semantic-release
-              npm run dist # run dist after release, s.t. we can glean published version
+              node scripts/semantic-release-extract-next-version.js
+              npm run dist
               npm run publish
+              npm run semantic-release || true
             else
               npx semantic-release --dry-run
               npm run dist
