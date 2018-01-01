@@ -18,3 +18,4 @@ native/artifacts.json
 .secrets
 app
 dist
+PUBLISHED_VERSION

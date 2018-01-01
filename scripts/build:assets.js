@@ -18,6 +18,12 @@ async function assets () {
     execa.shell('cp src/main/production.index.js app/index.js', childOpts)
   ])
   var appPkg = require('../package.json')
+  var versionFile = path.resolve(__dirname, '..', 'PUBLISHED_VERSION')
+  if (await fs.exists(versionFile)) {
+    appPkg.version = (await fs.readFile(versionFile)).toString().trim()
+  } else {
+    console.error('[clipster:build:assets]: unable to find version file. ignoring.')
+  }
   ;['build', 'scripts', 'devDependencies'].forEach(key => { delete appPkg[key] })
   appPkg.main = 'index.js'
   await fs.writeFile(

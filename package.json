@@ -9,7 +9,7 @@
   "scripts": {
     "build:assets": "node scripts/build:assets.js",
     "build:ui": "REACT_APP_WEBPACK_ENV_TARGET=electron-renderer NODE_ENV=production react-scripts build && mv build app/ui",
-    "clean": "rm -rf build dist",
+    "clean": "rm -rf build dist app PUBLISHED_VERSION",
     "dist": "electron-builder",
     "lint": "standard",
     "predist": "run-s clean build:*",
@@ -20,7 +20,7 @@
     "start": "run-p start:*",
     "start:electron:debug": "DEBUG=clipster* electron --inspect src/main/index.js",
     "start:react": "DEBUG=clipster* BROWSER=none REACT_APP_WEBPACK_ENV_TARGET=electron-renderer react-scripts start",
-    "semantic-release": "semantic-release"
+    "semantic-release": "node scripts/semantic-release.js"
   },
   "keywords": [],
   "author": "cdaringe",
