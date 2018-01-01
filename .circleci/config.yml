@@ -46,8 +46,7 @@ jobs:
           command: |
             if [[ $CIRCLE_BRANCH == "master" ]]
             then
-              node scripts/semantic-release-extract-next-version.js
-              npm run dist
+              npm run build
               npm run publish
               npm run semantic-release || true
             else
