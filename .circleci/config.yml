@@ -46,7 +46,7 @@ jobs:
           command: |
             if [[ $CIRCLE_BRANCH == "master" ]]
             then
-              npm run build
+              npm run build:mac-linux
               npm run publish
               npm run semantic-release || true
             else
