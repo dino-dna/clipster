@@ -41,6 +41,13 @@ jobs:
 
       # run tests!
       - run: nvm use node && npm run lint
-      - run: nvm use node && DEBUG=webjerk* npm test -- --verbose
-      - run: npx semantic-release
+      - run:
+          name: release
+          command: |
+            if [[ $CIRCLE_BRANCH == "master" ]]
+            then
+              npx semantic-release
+            else
+              npx semantic-release --dry-run
+            fi
 
