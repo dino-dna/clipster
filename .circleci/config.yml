@@ -42,4 +42,5 @@ jobs:
       # run tests!
       - run: nvm use node && npm run lint
       - run: nvm use node && DEBUG=webjerk* npm test -- --verbose
+      - run: npx semantic-release --dry-run
 

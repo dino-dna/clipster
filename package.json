@@ -2,25 +2,31 @@
   "name": "clipster",
   "description": "your favorite cross-platform clipboard manager.",
   "version": "0.0.0-development",
-  "main": "index.js",
+  "main": "README.md",
+  "files": [
+    "README.md"
+  ],
   "scripts": {
     "build:assets": "node scripts/build:assets.js",
     "build:ui": "REACT_APP_WEBPACK_ENV_TARGET=electron-renderer NODE_ENV=production react-scripts build && mv build app/ui",
     "clean": "rm -rf build dist",
-    "start": "run-p start:*",
+    "dist": "electron-builder",
+    "lint": "standard",
     "predist": "run-s clean build:*",
+    "pack": "electron-builder --dir",
     "postinstall": "electron-builder install-app-deps",
     "start:electron": "electron src/main/index.js",
+    "start": "run-p start:*",
     "start:electron:debug": "DEBUG=clipster* electron --inspect src/main/index.js",
     "start:react": "DEBUG=clipster* BROWSER=none REACT_APP_WEBPACK_ENV_TARGET=electron-renderer react-scripts start",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
     "semantic-release": "semantic-release"
   },
   "keywords": [],
   "author": "cdaringe",
   "license": "ISC",
   "devDependencies": {
+    "@semantic-release/release-notes-generator": "^6.0.3",
+    "condition-circle": "^2.0.1",
     "electron": "^1.7.10",
     "electron-build-env": "^0.2.0",
     "electron-builder": "^19.49.4",
@@ -29,8 +35,14 @@
     "execa": "^0.8.0",
     "npm-run-all": "^4.1.2",
     "react-scripts-webpack-config-editor": "^1.0.0",
-    "standard": "^10.0.3",
-    "semantic-release": "^11.0.2"
+    "semantic-release": "^11.0.2",
+    "standard": "^10.0.3"
+  },
+  "release": {
+    "generateNotes": {},
+    "verifyConditions": [
+      "condition-circle"
+    ]
   },
   "dependencies": {
     "abab": "^1.0.4",
