@@ -1,26 +1,36 @@
 {
   "name": "clipster",
-  "version": "0.0.1",
+  "description": "your favorite cross-platform clipboard manager.",
+  "version": "0.0.0-development",
   "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
-    "build": "electron-build-env neon build",
+    "build:assets": "node scripts/build:assets.js",
+    "build:ui": "REACT_APP_WEBPACK_ENV_TARGET=electron-renderer NODE_ENV=production react-scripts build && mv build app/ui",
+    "clean": "rm -rf build dist",
     "start": "run-p start:*",
+    "predist": "run-s clean build:*",
+    "postinstall": "electron-builder install-app-deps",
     "start:electron": "electron src/main/index.js",
     "start:electron:debug": "DEBUG=clipster* electron --inspect src/main/index.js",
-    "start:react": "DEBUG=clipster* BROWSER=none REACT_APP_WEBPACK_ENV_TARGET=electron-renderer react-scripts start"
+    "start:react": "DEBUG=clipster* BROWSER=none REACT_APP_WEBPACK_ENV_TARGET=electron-renderer react-scripts start",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "semantic-release": "semantic-release"
   },
   "keywords": [],
-  "author": "",
+  "author": "cdaringe",
   "license": "ISC",
   "devDependencies": {
     "electron": "^1.7.10",
     "electron-build-env": "^0.2.0",
+    "electron-builder": "^19.49.4",
     "electron-debug": "^1.4.0",
+    "electron-renderer-react-scripts-target": "^1.0.0",
+    "execa": "^0.8.0",
     "npm-run-all": "^4.1.2",
-    "standard": "^10.0.3"
+    "react-scripts-webpack-config-editor": "^1.0.0",
+    "standard": "^10.0.3",
+    "semantic-release": "^11.0.2"
   },
   "dependencies": {
     "abab": "^1.0.4",
@@ -36,5 +46,21 @@
     "skeleton-css": "^2.0.4",
     "typicons.font": "^2.0.9",
     "winston": "^2.4.0"
+  },
+  "build": {
+    "appId": "org.dino-dna.clipster",
+    "productName": "clipster"
+  },
+  "homepage": ".",
+  "standard": {
+    "ignore": [
+      "app",
+      "build",
+      "public"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dino-dna/clipster.git"
   }
 }

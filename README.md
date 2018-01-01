@@ -2,7 +2,6 @@
 
 hopefully, your favorite clipboard manager.
 
-
 ## arch
 
 - in the front, react w/ a simple stupid redux/elm like `(state, msg) => (state, cmd)` thingy

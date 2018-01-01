@@ -1,4 +1,4 @@
-function createCursor (size, font) {
+function createCursor (size, font) { // eslint-disable-line
   var canvas = document.createElement('canvas')
   canvas.width = size
   canvas.height = size

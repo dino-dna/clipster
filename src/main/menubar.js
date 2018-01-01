@@ -14,7 +14,7 @@ function createMenubar () {
       if (bounds.y <= 0) return process.platform.match(/win\d+/) ? -1 * bounds.height : bounds.height
       return 0
     },
-    dir: path.resolve(__dirname, '..', '..', 'img'),
+    dir: path.resolve(__dirname),
     index,
     width: 500,
     height: 600,
