@@ -7,6 +7,8 @@ jobs:
   build:
     machine: true
     working_directory: ~/repo
+    macos:
+      xcode: "9.0"
 
     steps:
       - checkout
