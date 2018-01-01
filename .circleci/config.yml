@@ -40,13 +40,15 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: nvm use node && npm run lint
+      - run: npm run lint
+      - run: npm run dist
       - run:
           name: release
           command: |
             if [[ $CIRCLE_BRANCH == "master" ]]
             then
               npx semantic-release
+              npm run publish
             else
               npx semantic-release --dry-run
             fi

@@ -14,6 +14,7 @@
     "lint": "standard",
     "predist": "run-s clean build:*",
     "pack": "electron-builder --dir",
+    "publish": "electron-builder --publish onTagOrDraft",
     "postinstall": "electron-builder install-app-deps",
     "start:electron": "electron src/main/index.js",
     "start": "run-p start:*",
@@ -61,7 +62,10 @@
   },
   "build": {
     "appId": "org.dino-dna.clipster",
-    "productName": "clipster"
+    "productName": "clipster",
+    "win": {
+      "publish": ["github"]
+    }
   },
   "homepage": ".",
   "standard": {
