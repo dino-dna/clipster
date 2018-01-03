@@ -18,7 +18,6 @@
     "lint": "standard",
     "pack": "electron-builder --dir",
     "publish": "electron-builder --publish always",
-    "postinstall": "electron-builder install-app-deps",
     "start:electron": "electron src/main/index.js",
     "start": "run-p start:*",
     "start:electron:debug": "DEBUG=clipster* electron --inspect src/main/index.js",
