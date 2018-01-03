@@ -31,7 +31,7 @@ async function assets () {
     JSON.stringify(appPkg, null, 2)
   )
   await execa.shell('cp -r node_modules app/node_modules', childOpts)
-  await execa.shell('cd app && npm prune && npm i', childOpts)
+  await execa.shell('cd app && yarn', childOpts)
 }
 
 assets()
