@@ -6,6 +6,8 @@ var debug = require('debug')('clipster:main:index')
 if (isDev) require('electron-debug')({ showDevTools: true })
 var { createMenubar, onReady } = require('./menubar')
 var init = require('./init')
+var autoUpdater = require('electron-updater').autoUpdater
+autoUpdater.checkForUpdatesAndNotify()
 
 async function run () {
   debug('initialing')
