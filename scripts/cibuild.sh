@@ -2,11 +2,12 @@
 
 set -x
 
+sudo chmod -R ug+rwx .
+
 yarn
 yarn lint
 yarn run build
 
-chmod -R ug+rwx .
 
 function electron_build () {
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
