@@ -1,8 +1,12 @@
+#!/bin/bash
+
 set -x
 
 yarn
 yarn lint
 yarn run build
+
+chmod -R ug+rwx .
 
 function electron_build () {
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then

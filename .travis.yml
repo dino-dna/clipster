@@ -35,7 +35,7 @@ before_script:
 
 script:
   - |
-    bash ./scripts/cibuild.sh
+    . ./scripts/cibuild.sh
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
 
