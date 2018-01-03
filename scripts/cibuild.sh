@@ -1,8 +1,9 @@
 #!/bin/bash
 
 set -x
+ls -al
 
-sudo chmod -R ug+rwx .
+sudo chmod -R ugo+rwx .
 
 yarn
 yarn lint
