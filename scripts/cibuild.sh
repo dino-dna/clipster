@@ -31,7 +31,11 @@ then
 else
   # todo, remove plbish from electron_build
   # electron_build
+  echo skip
 fi
 
 # wait for all artifacts up in release
 # close draft
+
+# hush hush, travis
+set +x
