@@ -1,6 +1,8 @@
+set -x
+
 yarn
 yarn lint
-yarn build
+yarn run build
 
 function electron_build () {
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
@@ -14,17 +16,16 @@ function electron_build () {
   else
     ./node_modules/.bin/electron-builder
   fi
-
 }
 
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
   electron_build
-  npm run publish
-  # npm run semantic-release || true
+  yarn release
+  # yarn semantic-release || true
 else
   electron_build
-  npm run build
+  yarn build
 fi
 
 # wait for all artifacts up in release

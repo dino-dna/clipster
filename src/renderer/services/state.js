@@ -1,4 +1,4 @@
-var moveItem = require('../../common/moveItem')
+// var moveItem = require('../../common/moveItem')
 var app = require('./app')
 var logger = require('./logger')
 var listeners = []
