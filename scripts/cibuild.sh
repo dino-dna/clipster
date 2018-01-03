@@ -18,7 +18,7 @@ function electron_build () {
       -v ~/.cache/electron:/root/.cache/electron \
       -v ~/.cache/electron-builder:/root/.cache/electron-builder \
       electronuserland/builder:wine \
-      /bin/bash -c "yarn --link-duplicates --pure-lockfile && ./node_modules/.bin/electron-builder --linux --win"
+      /bin/bash -c "yarn --link-duplicates --pure-lockfile && ./node_modules/.bin/electron-builder --linux --win --publish always"
   else
     ./node_modules/.bin/electron-builder
   fi
@@ -26,10 +26,11 @@ function electron_build () {
 
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
-  yarn release
+  electron_build
   # yarn semantic-release || true
 else
-  electron_build
+  # todo, remove plbish from electron_build
+  # electron_build
 fi
 
 # wait for all artifacts up in release
