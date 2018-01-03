@@ -58,6 +58,7 @@
     "perish": "^1.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-flip-move": "^2.10.0",
     "react-scripts": "^1.0.17",
     "skeleton-css": "^2.0.4",
     "typicons.font": "^2.0.9",
@@ -71,7 +72,9 @@
       "target": "dmg"
     },
     "win": {
-      "publish": ["github"]
+      "publish": [
+        "github"
+      ]
     }
   },
   "homepage": ".",

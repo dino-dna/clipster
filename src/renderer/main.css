@@ -80,6 +80,7 @@ body, #root, .root {
 }
 
 .content {
+  background-color: white;
   grid-area: content;
   text-align: left;
   display: flex;
@@ -172,4 +173,11 @@ th:last-child, td:last-child {
   border: lightgray 3px dashed;
   padding: 10px;
   margin: 10px;
+}
+
+.configuration-table {
+  margin: 8px;
+}
+.configuration-table .key {
+  text-align: right;
 }

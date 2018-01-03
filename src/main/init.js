@@ -33,7 +33,11 @@ async function initData (dataFilename) {
   }
   return defaultsDeep(data, {
     history: [],
-    bookmarks: []
+    bookmarks: [],
+    config: {
+      nonsense: true,
+      saveHistory: true
+    }
   })
 }
 

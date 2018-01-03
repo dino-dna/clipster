@@ -2,7 +2,8 @@
 
 var path = require('path')
 var url = require('url')
-var pkg = require('../package.json')
+var pkgFilename = path.resolve(__dirname, '..', '..', 'package.json')
+var pkg = require(pkgFilename)
 
 var isProductionBuild = false
 var isDev = false

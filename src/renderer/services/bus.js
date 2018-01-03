@@ -19,8 +19,14 @@ module.exports = function createBus (state) {
     deleteFromHistory (id) {
       ipcRenderer.send('webapp:deleteFromHistory', id)
     },
+    moveBookmark ({ id, dir }) {
+      ipcRenderer.send('webapp:moveBookmark', { id, dir })
+    },
     moveClip ({ id, dir }) {
       ipcRenderer.send('webapp:moveClip', { id, dir })
+    },
+    updateConfiguration ({ name, value }) {
+      ipcRenderer.send('webapp:updateConfiguration', { name, value })
     }
   }
   return bus

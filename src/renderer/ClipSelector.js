@@ -1,4 +1,5 @@
 import React from 'react'
+import FlipMove from 'react-flip-move'
 var logger = require('./services/logger')
 
 export default class ClipSelector extends React.Component {
@@ -43,23 +44,27 @@ export default class ClipSelector extends React.Component {
   render () {
     var { history } = this.props
     var { copyIcon, selectedId } = this.state
+    var rows = history.reverse()
+    console.log(rows.map(i => i.string).join(','))
     return (
       <div className='content'>
         <div className='clip-table'>
-          {
-            history.map(item => (
-              <div id={`clip_${item.id}`} key={item.id} className='clip-row' onClick={() => this.onSelectClip(item)}>
-                <span className={`clip-item ${selectedId === item.id ? 'clip-item-onselect' : ''}`}>
-                  <span className={`clip-item-icon clip-item-icon-copy typcn typcn-${(selectedId === item.id) ? (copyIcon || 'tabs-outline') : 'tabs-outline'}`} />
-                  <span className='clip-item-content'>{item.string}</span>
-                  <span onClick={evt => this.onMoveClip(evt, item, -1)} className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-up typcn typcn-arrow-up-outline' />
-                  <span onClick={evt => this.onMoveClip(evt, item, 1)} className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-down typcn typcn-arrow-down-outline' />
-                  <span onClick={evt => this.onBookmark(evt, item)} className='clip-item-icon clip-item-icon-bookmark typcn typcn-bookmark' />
-                  <span onClick={evt => this.onDelete(evt, item)} className='clip-item-icon clip-item-icon-delete typcn typcn-times-outline clip-item-last' />
-                </span>
-              </div>
-            ))
-          }
+          <FlipMove duration={200} easing='ease-in-out'>
+            {
+              rows.map(item => (
+                <div id={`clip_${item.id}`} key={item.id} className='clip-row' onClick={() => this.onSelectClip(item)}>
+                  <span className={`clip-item ${selectedId === item.id ? 'clip-item-onselect' : ''}`}>
+                    <span className={`clip-item-icon clip-item-icon-copy typcn typcn-${(selectedId === item.id) ? (copyIcon || 'tabs-outline') : 'tabs-outline'}`} />
+                    <span className='clip-item-content'>{item.string}</span>
+                    <span onClick={evt => this.onMoveClip(evt, item, 1)} className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-up typcn typcn-arrow-up-outline' />
+                    <span onClick={evt => this.onMoveClip(evt, item, -1)} className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-down typcn typcn-arrow-down-outline' />
+                    <span onClick={evt => this.onBookmark(evt, item)} className='clip-item-icon clip-item-icon-bookmark typcn typcn-bookmark' />
+                    <span onClick={evt => this.onDelete(evt, item)} className='clip-item-icon clip-item-icon-delete typcn typcn-times-outline clip-item-last' />
+                  </span>
+                </div>
+              ))
+            }
+          </FlipMove>
           {
             history.length ? null : (
               <div className='no-clips'>No content copied, yet!</div>

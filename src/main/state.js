@@ -10,8 +10,11 @@ var { isDev } = require('../common/constants')
  */
 function createState (state) {
   async function flushData (opts) {
+    var { saveHistory } = state.data.config
     var { sync } = opts || {}
     var serialized = JSON.parse(JSON.stringify(state.data))
+    if (!saveHistory) serialized.history = []
+    delete serialized.config.__isProxy
     ;['history', 'bookmarks'].map(key => {
       serialized[key].map(item => {
         if (item.string) item.string = btoa(item.string)
@@ -55,6 +58,7 @@ function createState (state) {
   // prep state for entry into main program
   state.data.history = createFieldProxy(state.data.history)
   state.data.bookmarks = createFieldProxy(state.data.bookmarks)
+  state.data.config = createFieldProxy(state.data.config)
   state.data = new Proxy(state.data, {
     set (obj, key, value) {
       debug(`${key}: ${value}`)

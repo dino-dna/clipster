@@ -9,7 +9,12 @@ export default class BookmarkSelector extends React.Component {
       selectedId: null
     }
     this.onDelete = this.onDelete.bind(this)
+    this.onMoveBookmark = this.onMoveBookmark.bind(this)
     this.onSelectBookmark = this.onSelectBookmark.bind(this)
+  }
+  onMoveBookmark (evt, item, dir) {
+    evt.stopPropagation()
+    this.props.update(this.props.messages.MOVE_BOOKMARK, { id: item.id, dir })
   }
   onDelete (evt, item) {
     evt.stopPropagation()
@@ -37,13 +42,13 @@ export default class BookmarkSelector extends React.Component {
       <div className='content'>
         <div className='bookmark-table'>
           {
-            bookmarks.map(item => (
+            bookmarks.reverse().map(item => (
               <div id={`clip_${item.id}`} key={item.id} className='clip-row' onClick={() => this.onSelectBookmark(item)}>
                 <span className={`clip-item ${selectedId === item.id ? 'bookmark-onselect' : ''}`}>
                   <span className={`clip-item-icon clip-item-icon-bookmark typcn typcn-${(selectedId === item.id) ? (copyIcon || 'bookmark') : 'bookmark'}`} />
                   <span className='clip-item-content'>{item.string}</span>
-                  <span className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-up typcn typcn-arrow-up-outline' />
-                  <span className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-down typcn typcn-arrow-down-outline' />
+                  <span onClick={evt => this.onMoveBookmark(evt, item, 1)} className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-up typcn typcn-arrow-up-outline' />
+                  <span onClick={evt => this.onMoveBookmark(evt, item, -1)} className='clip-item-icon clip-item-icon-arrow clip-item-icon-arrow-down typcn typcn-arrow-down-outline' />
                   <span onClick={evt => this.onDelete(evt, item)} className='clip-item-icon clip-item-icon-delete typcn typcn-times-outline clip-item-last' />
                 </span>
               </div>

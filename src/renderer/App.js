@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import Nav from './Nav'
 import ClipSelector from './ClipSelector'
 import BookmarkSelector from './BookmarkSelector'
+import Configurator from './Configurator'
 
 class App extends PureComponent {
   render () {
@@ -10,6 +11,9 @@ class App extends PureComponent {
     switch (route) {
       case '/bookmarks':
         body = <BookmarkSelector {...this.props} />
+        break
+      case '/config':
+        body = <Configurator {...this.props} />
         break
       default:
         body = <ClipSelector {...this.props} />

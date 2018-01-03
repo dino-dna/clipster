@@ -35,6 +35,11 @@ async function onReady ({ mb, state }) {
       payload: state.data.bookmarks
     })
     mb.window.webContents.executeJavaScript(`window.receive(${msg})`)
+    msg = JSON.stringify({
+      action: 'SET_CONFIGURATION',
+      payload: state.data.config
+    })
+    mb.window.webContents.executeJavaScript(`window.receive(${msg})`)
   }
 
   debug('menubar:ready')
@@ -59,6 +64,11 @@ async function onReady ({ mb, state }) {
       state.data.history = state.data.history.filter(item => item.id !== id)
       refreshUiState()
     })
+    ipcMain.on('webapp:moveBookmark', (evt, payload) => {
+      var { id, dir } = payload
+      state.data.bookmarks = moveItem(state.data.bookmarks, id, dir)
+      refreshUiState()
+    })
     ipcMain.on('webapp:moveClip', (evt, payload) => {
       var { id, dir } = payload
       state.data.history = moveItem(state.data.history, id, dir)
@@ -67,6 +77,14 @@ async function onReady ({ mb, state }) {
     ipcMain.on('webapp:moveBookmark', (evt, payload) => {
       var { id, dir } = payload
       state.data.bookmarks = moveItem(state.data.bookmarks, id, dir)
+      refreshUiState()
+    })
+    ipcMain.on('webapp:updateConfiguration', (evt, payload) => {
+      var { name, value } = payload
+      if (name === 'saveHistory' && payload === true) {
+        state.data.config.__permitOneTimeSave = true
+      }
+      state.data.config[name] = !value
       refreshUiState()
     })
   })
@@ -85,11 +103,7 @@ async function onReady ({ mb, state }) {
     }
     state.data.history.push(msg)
     if (state.data.history.length > state.maxHistoryLength) state.data.history.shift()
-    var clipsMessage = JSON.stringify({
-      action: 'ADD_CLIP',
-      payload: msg
-    })
-    mb.window.webContents.executeJavaScript(`window.receive(${clipsMessage})`)
+    refreshUiState()
   })
 }
 
