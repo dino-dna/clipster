@@ -13,7 +13,6 @@
     "extract-next-version": "node scripts/semantic-release-extract-next-version.js",
     "clean": "rm -rf build dist app PUBLISHED_VERSION",
     "clean:intermediate-build-arfitacts": "rm -rf PUBLISHED_VERSION",
-    "build": "echo 'building mac/linux' && electron-builder -ml",
     "postbuild": "run-s clean:intermediate-build-arfitacts",
     "lint": "standard",
     "pack": "electron-builder --dir",
