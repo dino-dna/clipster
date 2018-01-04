@@ -26,7 +26,7 @@ function electron_build () {
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
   electron_build "--publish always"
-  # yarn semantic-release || true
+  yarn semantic-release || true
 else
   electron_build ""
 fi
