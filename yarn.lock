@@ -2539,10 +2539,11 @@ electron-releases@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/electron-releases/-/electron-releases-2.1.0.tgz#c5614bf811f176ce3c836e368a0625782341fd4e"
 
-electron-renderer-react-scripts-target@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/electron-renderer-react-scripts-target/-/electron-renderer-react-scripts-target-1.0.2.tgz#e0ac1e74d2002e6824d3851ae525b802a24e5740"
+electron-renderer-react-scripts-target@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/electron-renderer-react-scripts-target/-/electron-renderer-react-scripts-target-1.1.1.tgz#ede343f1855737a981b93ed4b30178c7c49c9e11"
   dependencies:
+    debug "^3.1.0"
     react-scripts-webpack-config-editor "^1.0.0"
 
 electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.30:

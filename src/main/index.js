@@ -1,9 +1,9 @@
 'use strict'
 
 require('perish')
-var { isDev } = require('../common/constants')
+var { isDev, isProductionBuild } = require('../common/constants')
 var debug = require('debug')('clipster:main:index')
-if (isDev) require('electron-debug')({ showDevTools: true })
+if (!isProductionBuild && isDev) require('electron-debug')({ showDevTools: true })
 var { createMenubar, onReady } = require('./menubar')
 var init = require('./init')
 var autoUpdater = require('electron-updater').autoUpdater
