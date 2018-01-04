@@ -55,6 +55,7 @@
     "lodash": "^4.17.4",
     "menubar": "^5.2.3",
     "perish": "^1.0.1",
+    "pkg-up": "^2.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-flip-move": "^2.10.0",

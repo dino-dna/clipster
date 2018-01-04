@@ -3,6 +3,7 @@
 var execa = require('execa')
 var path = require('path')
 var fs = require('fs-extra')
+var pick = require('lodash/pick')
 
 var childOpts = {
   cwd: path.resolve(__dirname, '..'),
@@ -24,7 +25,7 @@ async function assets () {
   } else {
     console.error('[clipster:build:assets]: unable to find version file. ignoring.')
   }
-  ;['build', 'scripts', 'devDependencies'].forEach(key => { delete appPkg[key] })
+  appPkg = pick(appPkg, ['name', 'author', 'dependencies', 'author', 'license'])
   appPkg.main = 'index.js'
   await fs.writeFile(
     path.resolve(__dirname, '../app/package.json'),

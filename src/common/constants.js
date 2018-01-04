@@ -2,12 +2,12 @@
 
 var path = require('path')
 var url = require('url')
-var pkgFilename = path.resolve(__dirname, '..', '..', 'package.json')
-var pkg = require(pkgFilename)
+var pkgUp = require('pkg-up')
+var pkg = require(pkgUp.sync(__dirname))
 
 var isProductionBuild = false
 var isDev = false
-if (!pkg.scripts) {
+if (!pkg.version.match(/0\.0\.0/)) {
   isProductionBuild = true
   // we remove scripts on build.
   isDev = false
@@ -23,8 +23,6 @@ var index = isProductionBuild
     slashes: true
   })
   : 'http://localhost:3000'
-
-console.log(index)
 
 module.exports = {
   index,
