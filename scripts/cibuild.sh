@@ -7,8 +7,7 @@ sudo chmod -R ugo+rwx .
 
 yarn
 yarn lint
-yarn run build
-
+yarn prerelease
 
 function electron_build () {
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
@@ -18,20 +17,18 @@ function electron_build () {
       -v ~/.cache/electron:/root/.cache/electron \
       -v ~/.cache/electron-builder:/root/.cache/electron-builder \
       electronuserland/builder:wine \
-      /bin/bash -c "yarn --link-duplicates --pure-lockfile && ./node_modules/.bin/electron-builder --linux --win --publish always"
+      /bin/bash -c "yarn --link-duplicates --pure-lockfile && ./node_modules/.bin/electron-builder --linux --win $1"
   else
-    ./node_modules/.bin/electron-builder
+    ./node_modules/.bin/electron-builder $1
   fi
 }
 
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
-  electron_build
+  electron_build "--publish always"
   # yarn semantic-release || true
 else
-  # todo, remove plbish from electron_build
-  # electron_build
-  echo skip
+  electron_build ""
 fi
 
 # wait for all artifacts up in release
