@@ -25,7 +25,7 @@ async function assets () {
   } else {
     console.error('[clipster:build:assets]: unable to find version file. ignoring.')
   }
-  appPkg = pick(appPkg, ['name', 'author', 'dependencies', 'author', 'license'])
+  appPkg = pick(appPkg, ['name', 'version', 'author', 'dependencies', 'author', 'license'])
   appPkg.main = 'index.js'
   await fs.writeFile(
     path.resolve(__dirname, '../app/package.json'),
