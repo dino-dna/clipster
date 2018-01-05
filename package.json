@@ -65,8 +65,7 @@
     "appId": "org.dino-dna.clipster",
     "productName": "clipster",
     "mac": {
-      "category": "public.app-category.developer-tools",
-      "target": "dmg"
+      "category": "public.app-category.developer-tools"
     },
     "win": {
       "publish": [
