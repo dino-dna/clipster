@@ -5,6 +5,7 @@ var { clipboard: systemClipboard, ipcMain } = require('electron')
 var debug = require('debug')('clipster:main:menubar')
 var path = require('path')
 var moveItem = require('../common/moveItem')
+var contextMenu = require('./context-menu')
 
 function createMenubar () {
   var mb = menubar({
@@ -24,6 +25,9 @@ function createMenubar () {
 }
 
 async function onReady ({ mb, state }) {
+  mb.tray.on('right-click', () => {
+    mb.tray.popUpContextMenu(contextMenu)
+  })
   function refreshUiState () {
     var msg = JSON.stringify({
       action: 'SET_CLIPS',
@@ -55,6 +59,7 @@ async function onReady ({ mb, state }) {
     ipcMain.on('webapp:setPasteText', (evt, text) => {
       state.uiSelectedMsg = text
       systemClipboard.writeText(text)
+      setTimeout(() => mb.window.hide(), 300)
     })
     ipcMain.on('webapp:deleteBookmark', (evt, id) => {
       state.data.bookmarks = state.data.bookmarks.filter(item => item.id !== id)
