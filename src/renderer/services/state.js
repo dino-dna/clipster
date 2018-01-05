@@ -12,27 +12,27 @@ var state = {
 var _update = (msg, payload) => {
   switch (msg) {
     case ADD_CLIP:
-      return Object.assign({}, state, { history: state.history.concat(payload) })
+      return { ...state, history: state.history.concat(payload) }
     case BOOKMARK_CLIP:
       app.bus.bookmarkClip(payload)
-      return state
+      return { ...state }
     case DELETE_BOOKMARK:
       app.bus.deleteBookmark(payload)
-      return { ...state, bookmarks: state.bookmarks.filter(item => item.id !== payload) }
+      return { ...state }
     case DELETE_CLIP:
       app.bus.deleteFromHistory(payload)
-      return { ...state, history: state.history.filter(item => item.id !== payload) }
+      return { ...state }
     case MOVE_BOOKMARK:
       app.bus.moveBookmark(payload)
-      return state
+      return { ...state }
     case MOVE_CLIP:
       app.bus.moveClip(payload)
-      return state
+      return { ...state }
     case SET_CLIPS:
-      return Object.assign({}, state, { history: payload })
+      return { ...state, history: payload }
     case SELECT_CLIP:
       app.bus.setClipboard(payload.string)
-      return state
+      return { ...state }
     case SET_BOOKMARKS:
       return { ...state, bookmarks: payload }
     case SET_CONFIGURATION:
@@ -41,7 +41,7 @@ var _update = (msg, payload) => {
       return { ...state, route: payload }
     case UPDATE_CONFIGURATION:
       app.bus.updateConfiguration(payload)
-      return state
+      return { ...state }
     default:
       throw new Error(`unhandled message: ${msg}`)
   }
@@ -51,9 +51,7 @@ var update = (msg, payload) => {
   var lastState
   if (app.isDev) lastState = JSON.parse(JSON.stringify(state))
   state = _update(msg, payload)
-  for (var l in listeners) {
-    listeners[l](state)
-  }
+  for (var l in listeners) listeners[l](state)
   if (app.isDev) logger.info('(pre) STATE:', lastState, '(post) STATE:', state)
   return state
 }

@@ -28,22 +28,31 @@ async function onReady ({ mb, state }) {
   mb.tray.on('right-click', () => {
     mb.tray.popUpContextMenu(contextMenu)
   })
-  function refreshUiState () {
+  function sendClips () {
     var msg = JSON.stringify({
       action: 'SET_CLIPS',
       payload: state.data.history
     })
     mb.window.webContents.executeJavaScript(`window.receive(${msg})`)
-    msg = JSON.stringify({
+  }
+  function sendBookmarks () {
+    var msg = JSON.stringify({
       action: 'SET_BOOKMARKS',
       payload: state.data.bookmarks
     })
     mb.window.webContents.executeJavaScript(`window.receive(${msg})`)
-    msg = JSON.stringify({
+  }
+  function sendConfig () {
+    var msg = JSON.stringify({
       action: 'SET_CONFIGURATION',
       payload: state.data.config
     })
     mb.window.webContents.executeJavaScript(`window.receive(${msg})`)
+  }
+  function refreshUiState () {
+    sendClips()
+    sendBookmarks()
+    sendConfig()
   }
 
   debug('menubar:ready')
@@ -53,36 +62,31 @@ async function onReady ({ mb, state }) {
     ipcMain.on('webapp:bookmarkClip', (evt, newBookmark) => {
       state.uiLastBookmarkId = newBookmark.id
       state.data.bookmarks = state.data.bookmarks.filter(bookmark => bookmark.id !== newBookmark.id)
-      state.data.bookmarks.push(newBookmark)
-      refreshUiState()
+      state.data.bookmarks.unshift(newBookmark)
+      sendBookmarks()
     })
     ipcMain.on('webapp:setPasteText', (evt, text) => {
       state.uiSelectedMsg = text
       systemClipboard.writeText(text)
-      setTimeout(() => mb.window.hide(), 300)
+      // setTimeout(() => mb.window.hide(), 300)
     })
     ipcMain.on('webapp:deleteBookmark', (evt, id) => {
       state.data.bookmarks = state.data.bookmarks.filter(item => item.id !== id)
-      refreshUiState()
+      sendBookmarks()
     })
     ipcMain.on('webapp:deleteFromHistory', (evt, id) => {
       state.data.history = state.data.history.filter(item => item.id !== id)
-      refreshUiState()
+      sendClips()
     })
     ipcMain.on('webapp:moveBookmark', (evt, payload) => {
       var { id, dir } = payload
       state.data.bookmarks = moveItem(state.data.bookmarks, id, dir)
-      refreshUiState()
+      sendBookmarks()
     })
     ipcMain.on('webapp:moveClip', (evt, payload) => {
       var { id, dir } = payload
       state.data.history = moveItem(state.data.history, id, dir)
-      refreshUiState()
-    })
-    ipcMain.on('webapp:moveBookmark', (evt, payload) => {
-      var { id, dir } = payload
-      state.data.bookmarks = moveItem(state.data.bookmarks, id, dir)
-      refreshUiState()
+      sendClips()
     })
     ipcMain.on('webapp:updateConfiguration', (evt, payload) => {
       var { name, value } = payload
@@ -90,7 +94,7 @@ async function onReady ({ mb, state }) {
         state.data.config.__permitOneTimeSave = true
       }
       state.data.config[name] = !value
-      refreshUiState()
+      sendConfig()
     })
   })
   mb.on('after-create-window', () => {
@@ -106,8 +110,8 @@ async function onReady ({ mb, state }) {
       state.uiSelectedMsg = null
       return
     }
-    state.data.history.push(msg)
-    if (state.data.history.length > state.maxHistoryLength) state.data.history.shift()
+    state.data.history.unshift(msg)
+    if (state.data.history.length > state.maxHistoryLength) state.data.history.pop()
     refreshUiState()
   })
 }
