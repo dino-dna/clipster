@@ -16,7 +16,6 @@ download and install for your OS from [the releases](https://github.com/dino-dna
 
 ## features
 
-- auto-updates
 - bookmarks
 - optional saving of clipboard history to disk
 - history reordering
@@ -25,6 +24,7 @@ download and install for your OS from [the releases](https://github.com/dino-dna
 ## limitations
 
 - text only
+- no auto-updates.  i'd love to do this, but i'm not paying for signing certs.  if you have certs you want to share, let me know!
 
 ## arch
 
