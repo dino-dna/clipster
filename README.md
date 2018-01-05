@@ -10,6 +10,10 @@ hopefully, your favorite clipboard manager.
 
 <small><i>this project is still fairly alpha.  it's stable, but has a few quirks :)</i></small>
 
+# install
+
+download and install for your OS from [the releases](https://github.com/dino-dna/clipster/releases) page.
+
 ## features
 
 - auto-updates
