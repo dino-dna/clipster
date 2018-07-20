@@ -10,8 +10,8 @@ name = "clippy_rust"
 crate-type = ["dylib"]
 
 [build-dependencies]
-neon-build = "0.1.22"
+neon-build = "0.1.23"
 
 [dependencies]
-neon = "0.1.22"
-clipboard = "0.4.2"
+clipboard = "0.4.6"
+neon = { git = "https://github.com/neon-bindings/neon" }

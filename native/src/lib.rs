@@ -2,18 +2,25 @@
 extern crate neon;
 extern crate clipboard;
 
-use neon::vm::{Call, JsResult};
-use neon::js::JsString;
+use neon::prelude::*;
+use std::thread::{sleep};
+use std::time::{Duration};
 
-use clipboard::ClipboardProvider;
-use clipboard::ClipboardContext;
+use clipboard::{ClipboardContext, ClipboardProvider};
 
-fn get_content(call: Call) -> JsResult<JsString> {
-    let scope = call.scope;
-    let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
-    Ok(JsString::new(scope, ctx.get_contents().unwrap().as_str()).unwrap())
+pub fn poll (mut cx: FunctionContext) -> JsResult<'static, JsUndefined> {
+  let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
+  let mut last: String = ctx.get_contents().unwrap().to_owned();
+  let on_change = cx.argument::<JsFunction>(0).unwrap();
+  loop {
+    let curr = ctx.get_contents().unwrap();
+    if &curr == &last {
+      let args: Vec<Handle<JsString>> = vec![cx.string(curr.clone())];
+      // let args: Vec<Handle<JsNumber>> = vec![cx.number(16.0)];
+      let nul = cx.null();
+      on_change.call(&mut cx, nul, args).unwrap();
+    }
+    last = curr;
+    sleep(Duration::from_millis(500));
+  }
 }
-
-register_module!(m, {
-    m.export("get_content", get_content)
-});
