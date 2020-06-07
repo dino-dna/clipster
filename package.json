@@ -34,7 +34,7 @@
     "electron-builder": "^19.49.4",
     "electron-debug": "^1.4.0",
     "electron-renderer-react-scripts-target": "^1.1.1",
-    "execa": "^0.8.0",
+    "execa": "^4.0.2",
     "npm-run-all": "^4.1.2",
     "react-scripts-webpack-config-editor": "^1.0.0",
     "semantic-release": "^11.0.2",
