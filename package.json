@@ -56,7 +56,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-flip-move": "^2.10.0",
-    "react-scripts": "^1.0.17",
+    "react-scripts": "^3.4.1",
     "skeleton-css": "^2.0.4",
     "typicons.font": "^2.0.9",
     "winston": "^2.4.0"
