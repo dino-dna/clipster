@@ -5904,8 +5904,8 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
 perish@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/perish/-/perish-1.0.1.tgz#ccc3477123bf3c476f1783d79fa399f37003b9d3"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/perish/-/perish-1.0.3.tgz#cbd8d9147258269312c7c19416f7a95347982583"
 
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
