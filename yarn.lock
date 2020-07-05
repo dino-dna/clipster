@@ -6543,8 +6543,8 @@ react-flip-move@^2.10.0:
   resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-2.10.0.tgz#70978ed2ca4a6b94d01fe7a230970460f9127b67"
 
 react-scripts-webpack-config-editor@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-scripts-webpack-config-editor/-/react-scripts-webpack-config-editor-1.0.0.tgz#79eecfeab8ad56ac6fa50c775dba0c0a3284b3e6"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-scripts-webpack-config-editor/-/react-scripts-webpack-config-editor-1.0.1.tgz#a8122fa1034ac3febec42dae4057686bc663047d"
 
 react-scripts@^1.0.17:
   version "1.0.17"
