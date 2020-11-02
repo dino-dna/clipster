@@ -38,7 +38,7 @@
     "npm-run-all": "^4.1.2",
     "react-scripts-webpack-config-editor": "^1.0.0",
     "semantic-release": "^11.0.2",
-    "standard": "^10.0.3"
+    "standard": "^16.0.1"
   },
   "release": {
     "generateNotes": {}
