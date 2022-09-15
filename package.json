@@ -29,7 +29,7 @@
   "license": "ISC",
   "devDependencies": {
     "@semantic-release/release-notes-generator": "^6.0.3",
-    "electron": "^1.7.10",
+    "electron": "^20.1.4",
     "electron-build-env": "^0.2.0",
     "electron-builder": "^19.49.4",
     "electron-debug": "^1.4.0",
